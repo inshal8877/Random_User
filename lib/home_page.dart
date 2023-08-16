@@ -16,21 +16,6 @@ class _HomePageState extends State<HomePage> {
   late Model model;
   List<Results> list = [];
 
-
-  // void listItem(int index){
-  //   final data = _data[index];
-  //
-  // }
-
-
-  // Future fetchData() async {
-  //   final url = await http.get(Uri.parse("https://randomuser.me/api/?results=5"));
-  //   model = Model.fromJson(jsonDecode(url.body));
-  //   setState(() {
-  //     list = model.results!;
-  //   });
-  // }
-
   Future<List<dynamic>> fetchUsers() async {
     var result = await http.get(
         Uri.parse("https://randomuser.me/api/?results=5"));
@@ -63,11 +48,6 @@ class _HomePageState extends State<HomePage> {
 
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // fetchData();
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +63,6 @@ class _HomePageState extends State<HomePage> {
           future: fetchUsers(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
-              // print(_email(snapshot.data[0]));
               return ListView.builder(
                   padding: EdgeInsets.all(15),
                   itemCount: snapshot.data.length,
@@ -101,8 +80,6 @@ class _HomePageState extends State<HomePage> {
                                     fit:BoxFit.fill ),
                                 shape: BoxShape.rectangle
                               ),
-                              // child: Image(image: NetworkImage(snapshot.data[index]['picture']['large'],),
-                              //   height: 170,width: 130,fit: BoxFit.cover,),
                             ),
                           ),
                           Expanded(
@@ -161,43 +138,11 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-
-
-                          // Text(_name(snapshot.data[index]),
-                          //   style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),),
-                    // Card(
-                    //   child: Column(
-                    //     children: <Widget>[
-                    //       ListTile(
-                    //         leading: Text(_name(snapshot.data[index])),
-                    //         title: Text(_location(snapshot.data[index])),
-                    //         subtitle: Text(_email(snapshot.data[index])),
-                    //         trailing: Text(_dob(snapshot.data[index])),
-                    //       )
-                    //     ],
-                    //   ),
-                    // ),
-
                         ],
                       );
-
-                      // Card(
-                      //   child: Column(
-                      //     children: <Widget>[
-                      //       ListTile(
-                      //         leading: CircleAvatar(
-                      //             radius: 30,
-                      //             backgroundImage: NetworkImage(snapshot
-                      //                 .data[index]['picture']['large'])),
-                      //         title: Text(_name(snapshot.data[index])),
-                      //         subtitle: Text(_location(snapshot.data[index])),
-                      //         trailing: Text(_email(snapshot.data[index])),
-                      //       )
-                      //     ],
-                      //   ),
-                      // );
                   });
-            } else {
+            }
+            else {
               return Center(child: CircularProgressIndicator());
             }
           },
